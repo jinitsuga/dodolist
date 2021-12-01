@@ -1,0 +1,65 @@
+.main-header {
+  height: 55px;
+  width: 100%;
+  background-color: brown;
+  margin-bottom: 100px;
+}
+#left-nav {
+  height: 100vh;
+  width: 20%;
+  border-right: 3px solid;
+  margin-right: 75px;
+  margin-top: -100px;
+}
+#app-wrapper {
+  display: flex;
+}
+#content {
+  height: 80%;
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.form-description {
+  height: 300px;
+  width: 400px;
+}
+.hidden {
+  display: none;
+}
+.shown {
+  display: flex;
+}
+.add-project {
+  margin-top: 25px;
+  margin-left: 25px;
+}
+.add-project-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.project {
+  margin-left: 100px;
+  margin-bottom: 25px;
+}
+.proj-container {
+  margin-top: 50px;
+}
+
+/* ADD TASK FORM */
+.form-title {
+  height: 45px;
+  font-size: 24px;
+  margin-bottom: 50px;
+}
+input:invalid {
+  border-color: brown;
+}
+input:valid {
+  border-color: green;
+}
+input::-webkit-validation-bubble {
+  height: 150px;
+  font-weight: 400;
+}
