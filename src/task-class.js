@@ -38,9 +38,7 @@ class Task {
     const closeTask = document.createElement("button");
     closeTask.textContent = "X";
     closeTask.addEventListener("click", () => {
-      console.log(taskDisplayer.lastChild);
       this.clearTaskDisplayer();
-      console.log(taskDisplayer.lastChild);
     });
 
     // Enable editing the task and making it findable to display.
