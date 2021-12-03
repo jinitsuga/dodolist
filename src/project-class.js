@@ -34,6 +34,7 @@ class Project {
     const randyText = document.createElement("p");
     const task = document.createElement("li");
     task.id = this.tasks[this.tasks.length - 1].title;
+    task.dataset["item"] = this.tasks[this.tasks.length - 1].title;
     task.innerText = this.tasks[this.tasks.length - 1].title;
     taskWrap.append(task, randyText);
     this.element.appendChild(taskWrap);

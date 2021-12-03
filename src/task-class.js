@@ -18,10 +18,14 @@ class Task {
   //   return respuesta;
   // }
 
-  printTask() {
+  clearTaskDisplayer() {
     if (taskDisplayer.lastChild != null) {
       taskDisplayer.removeChild(taskDisplayer.lastChild);
     }
+  }
+
+  printTask() {
+    this.clearTaskDisplayer();
     let taskCard = document.createElement("div");
     taskCard.classList.add("task-cards");
 
@@ -30,6 +34,14 @@ class Task {
 
     let taskDescription = document.createElement("p");
     taskDescription.classList.add("task-descriptions");
+
+    const closeTask = document.createElement("button");
+    closeTask.textContent = "X";
+    closeTask.addEventListener("click", () => {
+      console.log(taskDisplayer.lastChild);
+      this.clearTaskDisplayer();
+      console.log(taskDisplayer.lastChild);
+    });
 
     // Enable editing the task and making it findable to display.
 
@@ -43,12 +55,40 @@ class Task {
       taskDuration.contentEditable = true;
       // time edition
       const taskTime = document.createElement("input");
-      taskTime.type = Number;
+      const taskTimeError = document.createElement("span");
+      taskTimeError.classList.add("form-error");
+
+      taskTime.type = "number";
+      taskTime.required = true;
+      taskTime.maxLength = 3;
       taskTime.placeholder = "Hours until task completion";
-      taskCard.appendChild(taskTime);
+      taskTime.addEventListener("input", () => {
+        console.log(taskTime.validity.typeMismatch);
+        console.log(taskTime.value);
+        if (
+          taskTime.validity.valueMissing ||
+          taskTime.validity.typeMismatch ||
+          taskTime.validity.tooShort ||
+          taskTime.value == ""
+        ) {
+          taskTimeError.innerText = "Ingresa la duración, en horas.";
+        } else {
+          taskTimeError.innerText = "";
+        }
+      });
+      taskCard.append(taskTime, taskTimeError);
 
       editTask.innerText = "Done editing";
+
       editTask.addEventListener("click", () => {
+        if (
+          taskTime.validity.valueMissing ||
+          taskTime.validity.typeMismatch ||
+          taskTime.value == ""
+        ) {
+          taskTime.setCustomValidity("Ingresa una duración, en horas");
+          return;
+        }
         this.title = taskTitle.innerText;
         taskElement.id = this.title;
         taskElement.innerText = this.title;
@@ -80,7 +120,8 @@ class Task {
       taskDescription,
       editTask,
       taskDuration,
-      completeTask
+      completeTask,
+      closeTask
     );
 
     taskDisplayer.appendChild(taskCard);
